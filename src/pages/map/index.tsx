@@ -64,12 +64,7 @@ export const Map = () => {
           image: markerImage,
         });
 
-        let content = `<div style="padding:5px;background: #FFF7FB;
-          box-shadow: 0px 0px 4px rgba(255, 103, 176, 0.2);
-          border-radius: 10px;
-          margin-bottom:110px;
-          letter-spacing: -0.408px;
-          color: #FF3F9B;">${i + 1}번째</div>`;
+        let content = `<div class="step">${i + 1}번째</div>`;
 
         let position = new kakao.maps.LatLng(
           query.data.scheduleDetails[i].latitude,
@@ -90,7 +85,6 @@ export const Map = () => {
         });
 
         bounds.extend(linePath[i]);
-
         customOverlay.setMap(map);
         polyline.setMap(map);
       }
