@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 button {
   background: inherit;
   border: none;
