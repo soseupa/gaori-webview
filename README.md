@@ -1,1 +1,1 @@
-![소개](https://github.com/she-s-thema/kkm_front/assets/80014467/b1d9bb4e-04ac-448b-b612-b1af6ea32e4a)
+![소개](https://github.com/Mobydick-Team/kkm_front_v2/assets/80014467/d2b07c34-ce68-4930-ae7a-9ea312383e9a)
