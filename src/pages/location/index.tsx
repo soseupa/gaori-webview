@@ -40,9 +40,5 @@ export const Location = () => {
     marker.setMap(map);
   }, []);
 
-  return (
-    <>
-      <div id="locate-map" style={{ width: "100%", height: "65%" }} />
-    </>
-  );
+  return <div id="locate-map" style={{ width: "100%", height: "100%" }} />;
 };
