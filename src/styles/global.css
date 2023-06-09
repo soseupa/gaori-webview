@@ -57,3 +57,22 @@ p {
   letter-spacing: -0.408px;
   color: #ff3f9b;
 }
+
+input {
+  color: #424242;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #dadada;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.box {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.box::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
