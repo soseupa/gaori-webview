@@ -3,7 +3,7 @@ export type SCHEDULE = {
   latitude: number;
   location: string;
   longitude: number;
-  orderIndex: number;
+  orderIndex?: number;
   title: string;
 };
 
