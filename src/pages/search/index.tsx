@@ -54,6 +54,9 @@ export const Search = () => {
 
   const search = () => {
     const ps = new kakao.maps.services.Places();
+    const imageSrc = "https://i.postimg.cc/15RDgg8y/pointer.png";
+    const imageSize = new kakao.maps.Size(27, 43);
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     ps.keywordSearch(searchText, (data: any, status: any) => {
       if (status === kakao.maps.services.Status.OK) {
@@ -64,6 +67,7 @@ export const Search = () => {
           let marker = new kakao.maps.Marker({
             map: map,
             position: new kakao.maps.LatLng(data[i].y, data[i].x),
+            image: markerImage,
           });
 
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
