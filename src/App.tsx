@@ -5,6 +5,7 @@ import { Map } from "./pages/map";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Home } from "./pages/home";
 import { Search } from "./pages/search";
+import { Location } from "./pages/location";
 
 const App = () => {
   const client = new QueryClient();
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/location" element={<Location />} />
           <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>

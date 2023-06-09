@@ -1,9 +1,5 @@
-import { getSchedule } from "@/apis/schedule/schedule.api";
-import { GET_SCHEDULE } from "@/apis/schedule/schedule.key";
-import { SCHEDULE_LIST } from "@/apis/schedule/schedult.type";
 import React, { useEffect } from "react";
-import { useQuery } from "react-query";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { getScheduleQuery } from "@/hooks/queries/schedule";
 
 declare global {
   interface Window {
@@ -14,19 +10,15 @@ declare global {
 const { kakao } = window;
 
 export const Map = () => {
-  const [params] = useSearchParams(useLocation().search);
-
-  const query = useQuery<SCHEDULE_LIST>([GET_SCHEDULE], () =>
-    getSchedule({ id: Number(params.get("id") as string), token: params.get("token") as string })
-  );
+  const data = getScheduleQuery();
 
   useEffect(() => {
-    if (query.data !== undefined) {
+    if (data !== undefined) {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(
-          query.data.scheduleDetails[Math.floor(query.data.scheduleDetails.length / 2)].latitude,
-          query.data.scheduleDetails[Math.floor(query.data.scheduleDetails.length / 2)].longitude
+          data.scheduleDetails[Math.floor(data.scheduleDetails.length / 2)].latitude,
+          data.scheduleDetails[Math.floor(data.scheduleDetails.length / 2)].longitude
         ),
         level: 6,
       };
@@ -36,18 +28,18 @@ export const Map = () => {
       let positions = [];
       let linePath = [];
 
-      for (let i = 0; i < query.data.scheduleDetails.length; i++) {
+      for (let i = 0; i < data.scheduleDetails.length; i++) {
         positions[i] = {
-          title: query.data.scheduleDetails[i].title,
+          title: data.scheduleDetails[i].title,
           latlng: new kakao.maps.LatLng(
-            query.data.scheduleDetails[i].latitude,
-            query.data.scheduleDetails[i].longitude
+            data.scheduleDetails[i].latitude,
+            data.scheduleDetails[i].longitude
           ),
         };
 
         linePath[i] = new kakao.maps.LatLng(
-          query.data.scheduleDetails[i].latitude,
-          query.data.scheduleDetails[i].longitude
+          data.scheduleDetails[i].latitude,
+          data.scheduleDetails[i].longitude
         );
       }
 
@@ -67,8 +59,8 @@ export const Map = () => {
         let content = `<div class="step">${i + 1}번째</div>`;
 
         let position = new kakao.maps.LatLng(
-          query.data.scheduleDetails[i].latitude,
-          query.data.scheduleDetails[i].longitude
+          data.scheduleDetails[i].latitude,
+          data.scheduleDetails[i].longitude
         );
 
         let customOverlay = new kakao.maps.CustomOverlay({
@@ -91,8 +83,8 @@ export const Map = () => {
 
       const firstPoint = new kakao.maps.Circle({
         center: new kakao.maps.LatLng(
-          query.data.scheduleDetails[0].latitude,
-          query.data.scheduleDetails[0].longitude
+          data.scheduleDetails[0].latitude,
+          data.scheduleDetails[0].longitude
         ),
         radius: 5,
         strokeColor: "#FF7CBB",
@@ -102,8 +94,8 @@ export const Map = () => {
 
       const lastPoint = new kakao.maps.Circle({
         center: new kakao.maps.LatLng(
-          query.data.scheduleDetails[query.data.scheduleDetails.length - 1].latitude,
-          query.data.scheduleDetails[query.data.scheduleDetails.length - 1].longitude
+          data.scheduleDetails[data.scheduleDetails.length - 1].latitude,
+          data.scheduleDetails[data.scheduleDetails.length - 1].longitude
         ),
         radius: 5,
         strokeColor: "#FF7CBB",
@@ -116,7 +108,7 @@ export const Map = () => {
 
       map.setBounds(bounds);
     }
-  }, [query]);
+  }, [data]);
 
   return <div id="map" style={{ width: "100%", height: "100%" }} />;
 };
